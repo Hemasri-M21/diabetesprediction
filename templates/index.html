@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Diabetes Prediction</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container{
+    width:650px;              /* wider instead of taller */
+    background:#fff;
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;   /* ⭐ two columns */
+    gap:15px 20px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:5px;
+    color:#444;
+}
+
+input[type="text"]{
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+input[type="text"]:focus{
+    border-color:#667eea;
+}
+
+.submit-btn{
+    grid-column:1/3;     /* button full width */
+    margin-top:10px;
+}
+
+input[type="submit"]{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.prediction{
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>🩺 Diabetes Prediction</h2>
+
+<form method="post" action="/predict">
+
+<div class="form-grid">
+
+<div class="field">
+<label>Pregnancies</label>
+<input type="text" name="num_preg"
+value="{{ form_data.num_preg if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Glucose</label>
+<input type="text" name="glucose_conc"
+value="{{ form_data.glucose_conc if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Blood Pressure</label>
+<input type="text" name="diastolic_bp"
+value="{{ form_data.diastolic_bp if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Insulin</label>
+<input type="text" name="insulin"
+value="{{ form_data.insulin if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>BMI</label>
+<input type="text" name="bmi"
+value="{{ form_data.bmi if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Pedigree</label>
+<input type="text" name="diab_pred"
+value="{{ form_data.diab_pred if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Age</label>
+<input type="text" name="age"
+value="{{ form_data.age if form_data else '' }}">
+</div>
+
+<div class="field">
+<label>Skin Thickness</label>
+<input type="text" name="skin"
+value="{{ form_data.skin if form_data else '' }}">
+</div>
+
+<div class="submit-btn">
+<input type="submit" value="Predict">
+</div>
+
+</div>
+</form>
+
+{% if prediction_text %}
+<div class="prediction">{{ prediction_text }}</div>
+{% endif %}
+
+</div>
+</body>
+</html>
